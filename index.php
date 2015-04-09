@@ -32,6 +32,10 @@
 
 		<script type="text/javascript" src="js/entities/entities.js"></script>
 		<script type="text/javascript" src="js/entities/HUD.js"></script>
+                <script type="text/javascript" src="js/entities/GameManager.js"></script>
+                <script type="text/javascript" src="js/entities/PlayerBaseEntity.js"></script>
+                <script type="text/javascript" src="js/entities/EnemyBaseEntity.js"></script>
+                <script type="text/javascript" src="js/entities/EnemyCreep.js"></script>
 
 		<script type="text/javascript" src="js/screens/title.js"></script>
 		<script type="text/javascript" src="js/screens/play.js"></script>
@@ -62,6 +66,6 @@
 				}
 			});
 		</script>
-                <script src=".../path/to/gamepad.js" type="text/javascript"></script>
+                
 	</body>
 </html>
