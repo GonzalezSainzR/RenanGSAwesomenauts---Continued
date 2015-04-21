@@ -45,10 +45,12 @@ game.PlayerEntity = me.Entity.extend({
         this.renderable.addAnimation("idle", [78]);
         this.renderable.addAnimation("walk", [118, 119, 120, 121, 122, 123, 124, 125], 80);
         this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
+        this.renderable.addAnimation("dance", [221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 264, 263, 262, 261, 260, 260, 261, 262, 263, 264, 265, 264, 263, 262, 261, 260], 80);
         this.renderable.setCurrentAnimation("idle");
     },
     
     update: function(delta) {
+        
         this.now = new Date().getTime();
 
         this.dead = this.checkIfDead();
@@ -88,7 +90,8 @@ game.PlayerEntity = me.Entity.extend({
         if (me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
             this.jump();
         }
-        this.attacking = me.input.isKeyPressed("attack")
+        this.attacking = me.input.isKeyPressed("attack");
+        
     },
     
     moveRight: function() {
@@ -130,6 +133,7 @@ game.PlayerEntity = me.Entity.extend({
         } else if (!this.renderable.isCurrentAnimation("attack")) {
             this.renderable.setCurrentAnimation("idle");
         }
+        
     },
     
     loseHealth: function(damage) {
@@ -227,5 +231,9 @@ game.PlayerEntity = me.Entity.extend({
         if (me.input.isKeyPressed("sprint")) {
             this.body.setVelocity(15, 20);
         }
-    }
+    },
+    
+    dance: function() {
+             this.renderable.setCurrentAnimation("dance");
+        },
 });

@@ -10,7 +10,8 @@ game.EnemyBaseEntity = me.Entity.extend({
                     return (new me.Rect(0, 0, 100, 70)).toPolygon();
                 }
             }]);
-
+        
+        this.gameOver = false;
         this.broken = false;
         this.health = game.data.enemyBaseHealth;
         this.alwaysUpdate = true;
@@ -26,8 +27,12 @@ game.EnemyBaseEntity = me.Entity.extend({
     update: function (delta) {
         if (this.health <= 0) {
             this.broken = true;
+            game.data.win = true;
             this.renderable.setCurrentAnimation("broken");
+            this.winMusic();
         }
+
+        
         this.body.update(delta);
 
         this._super(me.Entity, "update", [delta]);
@@ -38,5 +43,14 @@ game.EnemyBaseEntity = me.Entity.extend({
     },
     loseHealth: function () {
         this.health--;
-    }
+    },
+    winMusic: function() {
+        if (game.data.win === true && !this.gameOver) {
+            me.audio.stopTrack();
+            me.audio.play("WhoLikestoParty");
+            alert("you win");
+            this.gameOver = true;
+        }
+
+    },
 });
