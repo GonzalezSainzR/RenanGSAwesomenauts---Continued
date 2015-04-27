@@ -30,8 +30,8 @@
                     </div>
                     
                     <button type="button" id="register">Register</button>
-                    <button type="button" id="load">Register</button>
-                    <button type="button" id="mainmenu">Register</button>
+                    <button type="button" id="load">Load</button>
+                    <button type="button" id="mainmenu">Main Menu</button>
                 </form>
 		<!-- melonJS Library -->
 		<!-- build:js js/app.min.js -->
