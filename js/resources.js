@@ -17,6 +17,7 @@ game.resources = [
     {name: "gold-screen", type: "image", src: "data/img/gold_11.png"},
     {name: "load-screen", type: "image", src: "data/img/loadpic.png"},
     {name: "new-screen", type: "image", src: "data/img/newpic.png"},
+    {name: "BMG", type: "image", src: "data/img/BMG.png"},
     /* Atlases 
      * @example
      * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
@@ -28,6 +29,7 @@ game.resources = [
      * {name: "example01", type: "tmx", src: "data/map/example01.json"},
      */
     {name: "level01", type: "tmx", src: "data/map/test3.tmx"},
+    {name: "level02", type: "tmx", src: "data/map/test4.tmx"},
     /* Background music. 
      * @example
      * {name: "example_bgm", type: "audio", src: "data/bgm/"},

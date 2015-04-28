@@ -36,4 +36,15 @@ body {
     display: block;
     text-align: center;
     visibility: hidden;
+    background-color: #000;
+}
+
+#load{
+    visibility: hidden;
+    
+}
+
+#register{
+    visibility: hidden;
+    
 }
