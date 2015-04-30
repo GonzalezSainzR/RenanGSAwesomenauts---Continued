@@ -22,6 +22,8 @@ body {
 
     /* Hide the gap for font descenders. */
     display: block;
+    
+    
 
     /* disable scaling interpolation */
     image-rendering: optimizeSpeed;
@@ -36,7 +38,6 @@ body {
     display: block;
     text-align: center;
     visibility: hidden;
-    background-color: #000;
 }
 
 #load{
@@ -47,4 +48,8 @@ body {
 #register{
     visibility: hidden;
     
+}
+
+form{
+    background-color: #000;
 }
