@@ -40,6 +40,7 @@ var game = {
                 buyscreen: "",
                 buytext: "",
                 minimap: "",
+                miniPlayer: ""
 	},
 	
 	
