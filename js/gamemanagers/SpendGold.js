@@ -78,7 +78,7 @@ game.SpendGold = Object.extend({
         me.game.world.removeChild(game.data.buytext);
     },
     
-    checkBuyKets: function() {
+    checkBuyKeys: function() {
         if(me.input.isKeyPressed("F1")){
             if(this.checkCost(1)){
                 this.makePurchase(1);

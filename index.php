@@ -7,7 +7,6 @@ require_once("php/controller/create-db.php")
         <title>melonJS Template</title>
         <link rel="stylesheet" type="text/css" media="screen" href="index.css">
         <link rel="stylesheet" type="text/css" href="index.css">
-        <link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" media="screen" href="index.css">
         <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
@@ -72,80 +71,78 @@ require_once("php/controller/create-db.php")
         <!-- /build -->
         <!-- Bootstrap & Mobile optimization tricks -->
         <script type="text/javascript">
-                    window.onReady(function onReady() {
-                    game.onload();
-                            // Mobile browser hacks
-                            if (me.device.isMobile && !navigator.isCocoonJS) {
+            window.onReady(function onReady() {
+                game.onload();
+                // Mobile browser hacks
+                if (me.device.isMobile && !navigator.isCocoonJS) {
                     // Prevent the webview from moving on a swipe
-                    window.document.addEventListener("touchmove", function (e) {
-                    e.preventDefault();
-                            window.scroll(0, 0);
-                            return false;
+                    window.document.addEventListener("touchmove", function(e) {
+                        e.preventDefault();
+                        window.scroll(0, 0);
+                        return false;
                     }, false);
-                            // Scroll away mobile GUI
-                                    (function () {
-                                    window.scrollTo(0, 1);
-                                            me.video.onresize(null);
-                                    }).defer();
-                                    me.event.subscribe(me.event.WINDOW_ONRESIZE, function (e) {
-                                    window.scrollTo(0, 1);
-                                    });
-                            }
-                            });        </script>
+                    // Scroll away mobile GUI
+                    (function() {
+                        window.scrollTo(0, 1);
+                        me.video.onresize(null);
+                    }).defer();
+                    me.event.subscribe(me.event.WINDOW_ONRESIZE, function(e) {
+                        window.scrollTo(0, 1);
+                    });
+                }
+            });</script>
         <script>
-                            $("#mainmenu").bind("click", function(){
-                    me.state.change(me.state.MENU);
-                    });
-                            $("#register").bind("click", function(){
-                    $.ajax({
+            $("#mainmenu").bind("click", function() {
+                me.state.change(me.state.MENU);
+            });
+            $("#register").bind("click", function() {
+                $.ajax({
                     type: "POST",
-                            url: "php/controller/create-user.php",
-                            data: {
-                            username: $('#username').val(),
-                                    password: $('#password').val(),
-                            },
-                            dataType: "text"
-                    })
-                            .success(function(response){
-                            if (response === "true"){
-                            me.state.change(me.state.PLAY);
-                            } else{
-                            alert(response);
+                    url: "php/controller/create-user.php",
+                    data: {
+                        username: $('#username').val(),
+                        password: $('#password').val(),
+                    },
+                    dataType: "text"
+                })
+                        .success(function(response) {
+                            if (response === "true") {
+                                me.state.change(me.state.PLAY);
+                            } else {
+                                alert(response);
                             }
-                            })
-                            .fail(function(response){
+                        })
+                        .fail(function(response) {
                             alert("Fail");
-                            });
-                    });
-                            $("#load").bind("click", function(){
-                    $.ajax({
+                        });
+            });
+            $("#load").bind("click", function() {
+                $.ajax({
                     type: "POST",
                     url: "php/controller/login-user.php",
                     data: {
                         username: $('#username').val(),
                         password: $('#password').val(),
-                            },
-                            dataType: "text"
-                    })
-                            .success(function(response){
-                            if (response === "Invalid username and password"){
-                            alert(response);
-                            } else{
+                    },
+                    dataType: "text"
+                })
+                        .success(function(response) {
+                            if (response === "Invalid username and password") {
+                                alert(response);
+                            } else {
                                 var data = jQuery.parseJSON(response);
                                 game.data.exp = data["exp"];
                                 game.data.exp1 = data["exp1"];
                                 game.data.exp2 = data["exp2"];
                                 game.data.exp3 = data["exp3"];
                                 game.data.exp4 = data["exp4"];
-                                
-                                
-                            me.state.change(me.state.SPENDEXP);
+                                me.state.change(me.state.SPENDEXP);
                             }
-                            })
-                            .fail(function(response){
+                        })
+                        .fail(function(response) {
                             alert("Fail");
-                            });
-                    });
+                        });
+            });
         </script>
     </body>
 </html>
