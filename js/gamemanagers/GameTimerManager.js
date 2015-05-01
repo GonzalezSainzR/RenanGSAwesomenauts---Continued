@@ -23,7 +23,19 @@ game.GameTimerManager = Object.extend({
         if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
             this.lastCreep = this.now;
             var creepe = me.pool.pull("EnemyCreep", 2700, 0, {});
-            me.game.world.addChild(creepe, 5);
+            me.game.world.addChild(creepe, 10);
+        }
+        
+        if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
+            this.lastCreep = this.now;
+            var creepe = me.pool.pull("FriendlyCreep", 1000, 0, {});
+            me.game.world.addChild(creepe, 10);
+        }
+        
+        if (Math.round(this.now / 1000) % 10 === 0 && (this.now - this.lastCreep >= 1000)) {
+            this.lastCreep = this.now;
+            var creepe = me.pool.pull("EnemyHero", 2700, 0, {});
+            me.game.world.addChild(creepe, 10);
         }
     }
 });

@@ -18,6 +18,8 @@ game.resources = [
     {name: "load-screen", type: "image", src: "data/img/loadpic.png"},
     {name: "new-screen", type: "image", src: "data/img/newpic.png"},
     {name: "BMG2", type: "image", src: "data/img/BMG2.png"},
+    {name: "spear", type: "image", src: "data/img/spear.png"},
+    {name: "minimap", type: "image", src: "data/img/minimap.png"},
     /* Atlases 
      * @example
      * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},
@@ -42,6 +44,5 @@ game.resources = [
      * @example
      * {name: "example_sfx", type: "audio", src: "data/sfx/"}
      */
-//    {name: "hurt", type: "audio", src: "data/bgm/"},
-//    {name: "jump", type: "audio", src: "data/bgm/"}
+   {name: "jump", type: "audio", src: "data/sfx/"}
 ];

@@ -11,6 +11,9 @@ game.SpendExp = me.ScreenObject.extend({
         me.input.bindKey(me.input.KEY.F4, "F4");
         me.input.bindKey(me.input.KEY.F5, "F5");
         var exp1cost = ((Number(game.data.exp1) + 1) * 10);
+        var exp2cost = ((Number(game.data.exp2) + 1) * 10);
+        var exp3cost = ((Number(game.data.exp3) + 1) * 10);
+        var exp4cost = ((Number(game.data.exp4) + 1) * 10);
 
         me.game.world.addChild(new (me.Renderable.extend({
             init: function() {
@@ -34,16 +37,34 @@ game.SpendExp = me.ScreenObject.extend({
                 if (game.data.exp >= exp1cost) {
                     game.data.exp1 += 1;
                     game.data.exp -= exp1cost;
-                    me.state.change(me.state.PLAY);
-                }else{
+                    exp1cost = ((Number(game.data.exp1) + 1) * 10);
+                } else {
                     alert("Not enough Exp");
                 }
             } else if (action === "F2") {
-
+                if (game.data.exp >= exp2cost) {
+                    game.data.exp2 += 1;
+                    game.data.exp -= exp2cost;
+                    exp2cost = ((Number(game.data.exp2) + 1) * 10);
+                } else {
+                    console.log("not enough experience");
+                }
             } else if (action === "F3") {
-
+                if (game.data.exp >= exp3cost) {
+                    game.data.exp3 += 1;
+                    game.data.exp -= exp3cost;
+                    exp3cost = ((Number(game.data.exp3) + 1) * 10);
+                } else {
+                    console.log("not enough experience");
+                }
             } else if (action === "F4") {
-
+                if (game.data.exp >= exp4cost) {
+                    game.data.exp4 += 1;
+                    game.data.exp -= exp4cost;
+                    exp4cost = ((Number(game.data.exp4) + 1) * 10);
+                } else {
+                    console.log("not enough experience");
+                }
             } else if (action === "F5") {
                 me.state.change(me.state.PLAY)
             }

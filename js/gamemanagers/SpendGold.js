@@ -1,30 +1,28 @@
 game.SpendGold = Object.extend({
-    init: function(x, y, settings){
+    init: function(x, y, settings) {
         this.now = new Date().getTime();
         this.lastBuy = new Date().getTime();
         this.paused = false;
         this.alwaysUpdate = true;
         this.buying = false;
     },
-    
     update: function() {
         this.now = new Date().getTime();
-        if(me.input.isKeyPressed("buy") && this.now-this.lastBuy >= 1000 ){
+        if (me.input.isKeyPressed("buy") && this.now - this.lastBuy >= 1000) {
             this.lastBuy = this.now;
-            if(!this.buying){
+            if (!this.buying) {
                 this.startBuying();
-            }else{
+            } else {
                 this.stopBuying();
             }
         }
-        
+
         this.checkBuyKeys();
-        
+
         return true;
     },
     startBuying: function() {
         this.buying = true;
-        me.state.pause(me.state.PLAY);
         game.data.pausePos = me.game.viewport.localToWorld(0, 0);
         game.data.buyscreen = new me.Sprite(game.data.pausePos.x, game.data.pausePos.y, me.loader.getImage('gold-screen'));
         game.data.buyscreen.updateWhenPaused = true;
@@ -40,8 +38,7 @@ game.SpendGold = Object.extend({
         me.input.bindKey(me.input.KEY.F6, "F6", true);
         this.setBuyText();
     },
-    
-    setBuyText: function(){
+    setBuyText: function() {
         game.data.buytext = new (me.Renderable.extend({
             init: function() {
                 this._super(me.Renderable, 'init', [game.data.pausePos.x, game.data.pausePos.y, 300, 50]);
@@ -51,19 +48,18 @@ game.SpendGold = Object.extend({
             },
             draw: function(renderer) {
                 //this.font.draw(renderer.getContext(), "", 430, 130);
-                this.font.draw(renderer.getContext(), "PRESS F1-F6,Q, W, OR E TO BUY, B TO EXIT Current Gold: " + game.data.gold, this.pos.x, this.pos.y);
-                this.font.draw(renderer.getContext(), "Skill 1: Increase Damage. Current Level: " + game.data.skill1 + " Cost: " + ((game.data.skill1+1) * 10), this.pos.x + 100, this.pos.y + 40);
-                this.font.draw(renderer.getContext(), "Skill 2:Sprint Speed Increase. Current Level: " + game.data.skill2 + " Cost: " + ((game.data.skill2+1) * 10), this.pos.x + 100, this.pos.y + 80);
-                this.font.draw(renderer.getContext(), "Skill 3:Increase Health. Current Level: " + game.data.skill3 + " Cost: " + ((game.data.skill3+1) * 10), this.pos.x + 100, this.pos.y + 120);
-                this.font.draw(renderer.getContext(), "Q Ability: . Current Level: " + game.data.ability1 + " Cost: " + ((game.data.ability1+1) * 10), this.pos.x + 100, this.pos.y + 160);
-                this.font.draw(renderer.getContext(), "E Ability: . Current Level: " + game.data.ability2 + " Cost: " + ((game.data.ability2+1) * 10), this.pos.x + 100, this.pos.y + 200);
-                this.font.draw(renderer.getContext(), "X Ability: . Current Level: " + game.data.ability3 + " Cost: " + ((game.data.ability3+1) * 10), this.pos.x + 100, this.pos.y + 240);
+                this.font.draw(renderer.getContext(), "PRESS F1-F6,Q, E, OR X TO BUY, B TO EXIT Current Gold: " + game.data.gold, this.pos.x, this.pos.y);
+                this.font.draw(renderer.getContext(), "Skill 1: Increase Damage. Current Level: " + game.data.skill1 + " Cost: " + ((game.data.skill1 + 1) * 10), this.pos.x + 100, this.pos.y + 40);
+                this.font.draw(renderer.getContext(), "Skill 2:Sprint Speed Increase. Current Level: " + game.data.skill2 + " Cost: " + ((game.data.skill2 + 1) * 10), this.pos.x + 100, this.pos.y + 80);
+                this.font.draw(renderer.getContext(), "Skill 3:Increase Health. Current Level: " + game.data.skill3 + " Cost: " + ((game.data.skill3 + 1) * 10), this.pos.x + 100, this.pos.y + 120);
+                this.font.draw(renderer.getContext(), "Q Ability: . Current Level: " + game.data.ability1 + " Cost: " + ((game.data.ability1 + 1) * 10), this.pos.x + 100, this.pos.y + 160);
+                this.font.draw(renderer.getContext(), "E Ability: . Current Level: " + game.data.ability2 + " Cost: " + ((game.data.ability2 + 1) * 10), this.pos.x + 100, this.pos.y + 200);
+                this.font.draw(renderer.getContext(), "X Ability: Throwing Spears: . Current Level: " + game.data.ability3 + " Cost: " + ((game.data.ability3 + 1) * 10), this.pos.x + 100, this.pos.y + 240);
 
             },
         }));
         me.game.world.addChild(game.data.buytext, 35);
     },
-    
     stopBuying: function() {
         this.buying = false;
         me.state.resume(me.state.PLAY);
@@ -77,73 +73,85 @@ game.SpendGold = Object.extend({
         me.input.unbindKey(me.input.KEY.F6, "F6", true);
         me.game.world.removeChild(game.data.buytext);
     },
-    
     checkBuyKeys: function() {
-        if(me.input.isKeyPressed("F1")){
-            if(this.checkCost(1)){
+        if (me.input.isKeyPressed("F1")) {
+            if (this.checkCost(1)) {
                 this.makePurchase(1);
             }
-        }else if(me.input.isKeyPressed("F2")){
-            if(this.checkCost(2)){
+        } else if (me.input.isKeyPressed("F2")) {
+            if (this.checkCost(2)) {
                 this.makePurchase(2);
             }
-        }else if(me.input.isKeyPressed("F23")){
-            if(this.checkCost(3)){
+        } else if (me.input.isKeyPressed("F23")) {
+            if (this.checkCost(3)) {
                 this.makePurchase(3);
             }
-        }else if(me.input.isKeyPressed("F4")){
-            if(this.checkCost(4)){
+        } else if (me.input.isKeyPressed("F4")) {
+            if (this.checkCost(4)) {
                 this.makePurchase(4);
             }
-        }else if(me.input.isKeyPressed("F5")){
-            if(this.checkCost(5)){
+        } else if (me.input.isKeyPressed("F5")) {
+            if (this.checkCost(5)) {
                 this.makePurchase(5);
             }
-        }else if(me.input.isKeyPressed("F6")){
-            if(this.checkCost(6)){
+        } else if (me.input.isKeyPressed("F6")) {
+            if (this.checkCost(6)) {
                 this.makePurchase(6);
             }
         }
     },
-    
-    checkCost:function(skill){
-        if(skill===1 && (game.data.gold >= ((game.data.skill1+1) * 10))){
+    checkCost: function(skill) {
+        if (skill === 1 && (game.data.gold >= ((game.data.skill1 + 1) * 10))) {
             return true;
-        }else if(skill===2 && (game.data.gold >= ((game.data.skill2+1) * 10))){
+        } else if (skill === 2 && (game.data.gold >= ((game.data.skill2 + 1) * 10))) {
             return true;
-        }else if(skill===3 && (game.data.gold >= ((game.data.skill3+1) * 10))){
+        } else if (skill === 3 && (game.data.gold >= ((game.data.skill3 + 1) * 10))) {
             return true;
-        }else if(skill===4 && (game.data.gold >= ((game.data.ability1+1) * 10))){
+        } else if (skill === 4 && (game.data.gold >= ((game.data.ability1 + 1) * 10))) {
             return true;
-        }else if(skill===5 && (game.data.gold >= ((game.data.ability2+1) * 10))){
+        } else if (skill === 5 && (game.data.gold >= ((game.data.ability2 + 1) * 10))) {
             return true;
-        }else if(skill===6 && (game.data.gold >= ((game.data.ability3+1) * 10))){
+        } else if (skill === 6 && (game.data.gold >= ((game.data.ability3 + 1) * 10))) {
             return true;
-        }else{
+        } else {
             return false;
         }
     },
-    
     makePurchase: function(skill) {
-        if(skill === 1){
-        game.data.gold -= ((game.data.skill1+1)*10);
-        game.data.skill1 += 1;
-        game.data.playerAttack += 1;
-    }else if(skill === 2){
-         game.data.gold -= ((game.data.skill2+1)*10);
-        game.data.skill2 += 1;
-    }else if(skill === 3){
-         game.data.gold -= ((game.data.skill3+1)*10);
-        game.data.skill3 += 1;
-    }else if(skill === 4){
-         game.data.gold -= ((game.data.ability1+1)*10);
-        game.data.ability1 += 1;
-   }else if(skill === 5){
-         game.data.gold -= ((game.data.ability2+1)*10);
-        game.data.ability2 += 1;
-    }else if(skill === 6){
-         game.data.gold -= ((game.data.ability3+1)*10);
-        game.data.ability3 += 1;
-    }
+        if (skill === 1) {
+            game.data.gold -= ((game.data.skill1 + 1) * 10);
+            game.data.skill1 += 1;
+            game.data.playerAttack += 1;
+        } else {
+            console.log("not enough gold");
+        }
+        if (skill === 2) {
+            game.data.gold -= ((game.data.skill2 + 1) * 10);
+            game.data.skill2 += 1;
+        } else {
+            console.log("not enough gold");
+        }
+        if (skill === 3) {
+            game.data.gold -= ((game.data.skill3 + 1) * 10);
+            game.data.skill3 += 1;
+        } else {
+            console.log("not enough gold");
+        }
+        if (skill === 4) {
+            game.data.gold -= ((game.data.ability1 + 1) * 10);
+            game.data.ability1 += 1;
+        } else {
+            console.log("not enough gold");
+        }
+        if (skill === 5) {
+            game.data.gold -= ((game.data.ability2 + 1) * 10);
+            game.data.ability2 += 1;
+        } else {
+            console.log("not enough gold");
+        }
+        if (skill === 6) {
+            game.data.gold -= ((game.data.ability3 + 1) * 10);
+            game.data.ability3 += 1;
+        }
     },
 });
